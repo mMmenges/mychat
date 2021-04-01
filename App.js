@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// importing dependencies
+import React, { Component } from 'react';
+// import react Navigation
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// importing screens
+import Start from './components/start';
+import Chat from './components/chat';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const firebase = require('firebase');
+require('firebase/firestore');
+	
+// creating the navigator
+const Stack = createStackNavigator();
+
+export default class ChatApp extends Component {
+	render() {
+		return (
+			// Navigation between Start and Chat
+			<NavigationContainer>
+				<Stack.Navigator initialRouteName="Start">
+					<Stack.Screen name="Start" component={Start} />
+					<Stack.Screen name="Chat" component={Chat} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
