@@ -3,6 +3,13 @@
 This project is designed to provides users with a chat interface including the ability to share images, location and view previous messages when offline.
 It is designed specifically for mobile devices using:
 * React Native with GiftedChat
+* React Native
+* React Native Gifted Chat
+* React Native Maps
+* Expo.io
+* Google Firestore Database for storage
+* Google Firebase authentication
+* React Native AsyncStorage for app local storage
 
 ## Installation
 
