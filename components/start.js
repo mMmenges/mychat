@@ -2,13 +2,6 @@ import React, { useEffect } from 'react';
 import { ImageBackground, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
-
-/**
- * @requires React
- * @requires react-native
- * @requires react-native-gesture-handler
- */
-
 export default class Start extends React.Component {
 	constructor(props) {
 		super(props);
@@ -24,13 +17,9 @@ export default class Start extends React.Component {
 		const { name, colors, colorChoice } = this.state;
 		return (
 			// Set background of app to image
-			<ImageBackground source={require('../assets/sky.jpg')} style={
-				styles.background} imageStyle={{ resizeMode: 'cover' }}>
+			<ImageBackground source={require('../assets/sky.jpg')} style={styles.background} imageStyle={{ resizeMode: 'cover' }}>
 				{/* Add component to move input container out of the way of the keyboard */}
-				<KeyboardAvoidingView style={
-					styles.keyboardContainer
-					} behavior="height" keyboardVerticalOffset={
-						Platform.OS === 'ios' ? 50 : 'height'}>
+				<KeyboardAvoidingView style={styles.keyboardContainer} behavior="height" keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 'height'}>
 					<Text style={styles.title}>The Chat App Salutes You!</Text>
                     <Text style={styles.subtitle}>And So Do I</Text>
                     <Text style={styles.subtitle}>Michael Menges</Text>
@@ -53,14 +42,8 @@ export default class Start extends React.Component {
 						{/* Create buttons for user to select background color, store as state to pass to Chat screen */}
 						<View style={styles.colorContainer}>
 							{colors.map((color) => (
-								<View style={
-									[styles.colorBorder, colorChoice === color ? { borderColor: color } : null]
-									} key={color}>
-									<TouchableOpacity onPress={
-										() => this.setState({ colorChoice: color })
-										} style={
-											[styles.colorButton, { backgroundColor: color }]
-											} accessible={true} accessibilityLabel="background color options" accessibilityHint="Choose the color for the background of your chat" accessibilityRole="button" />
+								<View style={[styles.colorBorder, colorChoice === color ? { borderColor: color } : null]} key={color}>
+									<TouchableOpacity onPress={() => this.setState({ colorChoice: color })} style={[styles.colorButton, { backgroundColor: color }]} accessible={true} accessibilityLabel="background color options" accessibilityHint="Choose the color for the background of your chat" accessibilityRole="button" />
 								</View>
 							))}
 						</View>

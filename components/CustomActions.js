@@ -4,17 +4,6 @@ import PropTypes from 'prop-types';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
-
-/**
- * @requires React
- * @requires react-native
- * @requires PropTypes
- * @requires expo-permissions
- * @requires expo-image-picker
- * @requires expo-location
- */
-
-// importing firebase
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -23,14 +12,7 @@ export default class CustomActions extends React.Component {
 		super();
 	}
 
-
-/**
- * Actions open and user can select from actions. 'Cancel' will close the options.
- * @function onActionPress
- * @async
- * provides the options for the user to select using GiftedChat template
- */
-
+	// Displays ActionSheet when user clicks action button
 	onActionPress = () => {
 		const options = ['Choose From Library', 'Take Picture', 'Send Location', 'Cancel'];
 		const cancelButtonIndex = options.length - 1;
@@ -56,14 +38,7 @@ export default class CustomActions extends React.Component {
 		);
 	};
 
-/**
- * Allows user to choose image from their library to send
- * @function pickImage
- * @async
- * @return {Promise<image>} takes a picture using the devices camera
- */
-
-	
+	// Allows user to choose image from their library to send
 	pickImage = async () => {
 		// Asks user for permission to access library
 		const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
@@ -101,13 +76,6 @@ export default class CustomActions extends React.Component {
 		}
 	};
 
-	/**
-	 * @function uploadImageFetch
-	 * @async 
-	 * @param {string} uri
-	 * @return {return<string>} provides the new url for the stored image
-	 */
-
 	// Upload image to cloud storge as blob
 	uploadImageFetch = async (uri) => {
 		try {
@@ -143,14 +111,6 @@ export default class CustomActions extends React.Component {
 		}
 	};
 
-
-/**
- * @function getLocation
- * @async
- * @return {Promise<location>} provides geolocartion from users device
- */
-
-
 	// Get and send user's location
 	getLocation = async () => {
 		// Asks user for permission to access location
@@ -178,26 +138,14 @@ export default class CustomActions extends React.Component {
 
 	render() {
 		return (
-			<TouchableOpacity style={
-				[styles.container]
-				} onPress={
-					this.onActionPress
-					} accessibilityLabel="Action Button" accessibilityHint="Choose an image from your library, take a picture, or send your current location">
-				<View style={
-					[styles.wrapper, this.props.wrapperStyle]
-					}>
-					<Text style={
-						[styles.iconText, this.props.iconTextStyle]
-						}>+</Text>
+			<TouchableOpacity style={[styles.container]} onPress={this.onActionPress} accessibilityLabel="Action Button" accessibilityHint="Choose an image from your library, take a picture, or send your current location">
+				<View style={[styles.wrapper, this.props.wrapperStyle]}>
+					<Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
 				</View>
 			</TouchableOpacity>
 		);
 	}
 }
-
-/**
- * styles sheet for styling the custom actions
- */
 
 const styles = StyleSheet.create({
 	container: {
