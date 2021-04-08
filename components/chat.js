@@ -6,23 +6,10 @@ import NetInfo from '@react-native-community/netinfo';
 import MapView from 'react-native-maps';
 import CustomActions from './CustomActions';
 
-
-/**
- * @requires React
- * @requires react-native
- * @requires react-native-gifted-chat
- * @requires react-native-community/async-storage
- * @requires react-native-community/netinfo
- * @requires react-native-maps
- * @requires ./CustomActions
-*/
-
-// importing firebase
 const firebase = require('firebase');
 require('firebase/firestore');
 
 export default class Chat extends React.Component {
-	// adding messages into the state object of the app
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -38,26 +25,15 @@ export default class Chat extends React.Component {
 			location: null,
 		};
 
-/**
- * firebase parameters for asynch storage
- * @param {string} apiKey
- * @param {string} authDomain
- * @param {string} projectId
- * @param {string} storageBucket
- * @param {string} messagingSenderId
- * @param {string} appId
- */
-
 		// Firebase configuration for app
 		const firebaseConfig = {
-			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 			apiKey: "AIzaSyB0v2DAZxRwji7iAg_-so3psN0pgMUmm6Q",
-    	    authDomain: "test1-5a4d2.firebaseapp.com",
-        	projectId: "test1-5a4d2",
-        	storageBucket: "test1-5a4d2.appspot.com",
-        	messagingSenderId: "301781037413",
-        	appId: "1:301781037413:web:7e8b8476587e5f4e8c718c",
-        	// measurementId: "G-DNW9NPHPDW"
+        authDomain: "test1-5a4d2.firebaseapp.com",
+        projectId: "test1-5a4d2",
+        storageBucket: "test1-5a4d2.appspot.com",
+        messagingSenderId: "301781037413",
+        //appId: "1:301781037413:web:7e8b8476587e5f4e8c718c",
+        //measurementId: "G-DNW9NPHPDW"
 		};
 
 		// Initialize Firestore
@@ -65,16 +41,6 @@ export default class Chat extends React.Component {
 			firebase.initializeApp(firebaseConfig);
 		}
 	}
-
-/**
- * Mounting the component for the chat screen
- * using NetInfo to assess the connectivity of the app/user to establish
- * wether the connection is online and if not the locally stored messages are to return.
- * @async
- * @function
- * @param {*} user
- * @return {Promise<*>} messages from firebase storeage
- */
 
 	componentDidMount() {
 		// Define props passed from Start screen
@@ -129,8 +95,6 @@ export default class Chat extends React.Component {
 		this.authUnsubscribe();
 	}
 
-
-
 	// Load messages from storage when offline
 	async getMessages() {
 		let messages = [];
@@ -152,16 +116,6 @@ export default class Chat extends React.Component {
 			console.log(error.message);
 		}
 	}
-
-/**
- * @function addMessage
- * @type {string} 
- * @type {date} 
- * @type {string}
- * @type {object}
- * @type {string}
- * @type {location}
- */
 
 	// Add new message to Firestore db
 	addMessage() {
@@ -296,25 +250,7 @@ export default class Chat extends React.Component {
 		return (
 			// Sets colorChoice from Start screen as Chat screen background color
 			<View style={{ flex: 1, backgroundColor: color }}>
-				<GiftedChat renderSystemMessage={
-					this.renderSystemMessage.bind(this)
-					} renderDay={
-						this.renderDay.bind(this)
-						} renderBubble={
-							this.renderBubble.bind(this)
-							} renderInputToolbar={
-								this.renderInputToolbar.bind(this)
-								} renderActions={
-									this.renderCustomActions
-									} renderCustomView={
-										this.renderCustomView
-										} messages={
-											this.state.messages
-											} onSend={
-												(messages) => this.onSend(messages)
-												} user={
-													this.state.user
-													} />
+				<GiftedChat renderSystemMessage={this.renderSystemMessage.bind(this)} renderDay={this.renderDay.bind(this)} renderBubble={this.renderBubble.bind(this)} renderInputToolbar={this.renderInputToolbar.bind(this)} renderActions={this.renderCustomActions} renderCustomView={this.renderCustomView} messages={this.state.messages} onSend={(messages) => this.onSend(messages)} user={this.state.user} />
 
 				{/* Prevent keyboard from hiding input field */}
 				{Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
